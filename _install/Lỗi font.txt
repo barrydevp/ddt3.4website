@@ -1,0 +1,3 @@
+IIS -> MIME Types -> Add    
+File name extension -> .woff2;
+MIME Types -> font/woff2

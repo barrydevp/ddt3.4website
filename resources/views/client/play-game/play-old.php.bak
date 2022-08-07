@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="vn" xmlns:og="http://ogp.me/ns#" lang="vn" class="no-js">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=9" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="description" content="Gunny phiên bản mới nhất - Miễn phí 500.000 Coin Webshop. Miễn phí pet Tôn Ngộ Không. Thích cái gì là có cái đó. Trải nghiệm ngay nào!!!">
+    <meta name="keywords" content="gunny free, ddtank, ddtank private, gunny private, gunny lậu, gunny private, gunny miễn phí, gunny đầy đủ tính năng, gunny phó bản chuẩn zing, gunny có doanh chiến, gunny có guild chiến, gunny có tranh bá chí tôn, gunny có pet tôn ngộ không, gunny miễn phí pet tôn ngộ không, gunny, gunny lau, gunny lau moi nhat, gunny phien ban moi, gunny moi nhat, gunny dai chien 7 thanh pho, gunny lau full xu, gunnyfullxu, gunny lau co pet ton ngo khong, gunny lau mien phi pet ton ngo khong, pet ton ngo khong gunny, free pet ton ngo khong, gunny full xu, gunny cay quoc, gunny day du tinh nang, gunny full pho ban, gunny pho ban chuan, gunny pho ban do ngon">
+    <meta name="robots" content="index, follow" />
+    <title> {{$server->ServerName}} - Gunny Miễn Phí</title>
+
+    <link rel="stylesheet" href="/assets/game/css/dhtmlwindow.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/game/css/chat.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/game/css/player.css?v=0.17" type="text/css" />
+    <link href="/assets/game/css/responsive-slider.css" rel="stylesheet" media="screen" />
+    <link href="/assets/game/css/bootstrap.min.css" rel="stylesheet" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/assets/game/fancy/jquery.fancybox.css?v=2.1.5" media="screen" />
+    <script language="javascript" src="/assets/game/js/swfobject.js"></script>
+    <script language="javascript" src="/assets/game/js/jquery-1.11.0.js"></script>
+    <script src="/assets/game/js/jquery-ui.min.js"></script>
+    <script src="/assets/game/js/jquery.event.move.js"></script>
+    <script src="/assets/game/js/responsive-slider.js"></script>
+    <script type="text/javascript" src="/assets/game/fancy/jquery.fancybox.js?v=2.1.5"></script>
+    <script src="/assets/game/js/fuckadblock.js"></script>
+    <script type="text/javascript">
+        var canMove = false;
+
+        function goodbye(e) {
+            if (canMove == false) {
+                if (!e) e = window.event;
+                //e.cancelBubble is supported by IE - this will kill the bubbling process.
+                e.cancelBubble = true;
+                e.returnValue = 'Bạn có chắc là muốn rời khỏi trò chơi?'; //This is displayed on the dialog
+
+                //e.stopPropagation works in Firefox.
+                if (e.stopPropagation) {
+                    e.stopPropagation();
+                    e.preventDefault();
+                }
+            }
+
+        }
+        window.onbeforeunload = goodbye;
+
+        function toLocation(url, msg) {
+            alert(msg);
+            closeWindow("1", url);
+        }
+
+        var flashCall = false;
+
+        function closeWindow(flag, loginUrl) {
+
+            flashCall = true;
+            if (flag == "0") {
+                top.window.opener = null;
+                top.window.open("", "_self");
+                top.window.close();
+            } else if (flag == "1") {
+
+                window.location.href = loginUrl;
+
+            }
+        }
+    </script>
+
+    <style>
+        .gunny-nav {
+            position: fixed;
+            width: 100%;
+        }
+
+        .play-content {
+            padding-top: 20px;
+        }
+    </style>
+
+</head>
+
+<body scroll="no" class="playing">
+
+<script src="/assets/game/js/event_news.js"></script>
+
+<!--For player:-->
+<div class="play-area" id="container" style="overflow-y: auto;">
+
+    <!--right-->
+    <div class="gunny-nav bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <ul class="gunny-nav-wrapp list-inline">
+                        <li class="pr-20">
+                            <a href="{{route('home')}}" class="font-weight-bold text-green" target="_blank">Trang chủ</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+
+                        <div class="server col-md-4">
+                            <div class="show-list" style="cursor:pointer;">
+                                <ul class="list-inline">
+                                    <li><a href="play.php?id=1001">Server : {{$server->ServerName}}</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="play-social  col-md-4">
+                            <span class="text-center text_account">Account, {{$member->Email}}</span>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="text_coin">Coin hiện có: <span class="badge">{{number_format($member->Money, 0, '.', '.')}}</span></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="play-content">
+        <div class="relative" style="margin-left:7px;">
+            <table>
+                <tr>
+                    <td>
+                        <div class="fcontent frame" id="flashcontent">
+                            <div class="frame-top"></div>
+                            <script src="/assets/game/js/swfobject.js"></script>
+                            <script>
+                                var swfPath = "/flash/Loading.swf";
+                                var flashvars = {
+                                    user: "{{$member->Email}}",
+                                    key: "{{$keyrand}}",
+                                    v: "104",
+                                    rand: "92386938",
+                                    config: "{{$configLink}}"
+                                };
+
+                                var params = {
+                                    menu: "false",
+                                    scale: "noScale",
+                                    //allowFullscreen: "true",
+                                    allowScriptAccess: "always",
+                                    //bgcolor: "",
+                                    wmode: "direct" // can cause issues with FP settings & webcam
+                                };
+
+                                var attributes = {
+                                    id: "gameContent",
+                                    name: "Gunny 1",
+                                    style: "margin: 0 auto;position: relative;left: -16px; display:block !important;"
+                                };
+
+                                swfobject.embedSWF(swfPath, "gameContent", "1000", "600", "11.8.0", "expressInstall.swf", flashvars, params, attributes);
+                            </script>
+                            <center>
+                                <div id="gameContent">
+                                    <p><a href="/Launcher.rar"><b>Vui lòng tải Launcher để chơi game.</b></a></p>
+                                </div>
+                            </center>
+                        </div>
+                        <!--<div id="videocontent" style="display:none; margin: 0 auto; width:1010px">
+                              </div>-->
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</div>
+<a href="#one"></a>
+<script>
+    window.scrollTo(0, 2000);
+</script>
+<!-- /For player-->
+
+</body>
+
+</html>
