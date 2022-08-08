@@ -5,7 +5,7 @@
     @include('client.related.slide')
     @include('client.related.news')
     {{-- LAUNCHER --}}
-    <div class="cards animElement slide-bottom time-300">
+    <div class="cards slide-bottom time-300" style="position: fixed; right: 10px; top: calc(50% - 120px);">
         <a href="{{$config['launcher_download_url']}}" target="_BLANK" class="right">
             <img src="assets/img/3.png">
         </a>

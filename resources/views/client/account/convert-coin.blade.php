@@ -56,6 +56,7 @@
     </div>
     <script>
         var heSoCoin = {{$heSoCoin}};
+        var xuBonus = {{Auth::guard('member')->user()->getVipBonus()}};
     </script>
 </section>
 

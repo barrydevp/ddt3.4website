@@ -3,9 +3,10 @@
     @auth('member')
         <div class="clearfix">
             <div style="float: left; max-width: 70%; line-height: 1; overflow: hidden;">
-                <p style="font-size: 35px; color: #555;">
-                    <small style="font-size: .5em;font-family: 'BreeSerif'">Chào mừng Gunner</small>
-                    <span style="font-family: 'BreeSerif'">{{Auth::guard('member')->user()->Email}}</span>
+                <p style="font-size: 35px; color: #555; display: flex;flex-direction: column;align-items: flex-start;justify-content: flex-end;">
+                    <small style="font-size: .5em;font-family: 'BreeSerif';margin: 0;">Chào mừng Gunner</small>
+                    <span style="font-family: 'BreeSerif';margin: 0;">{{Auth::guard('member')->user()->Email}}</span>
+                    <img style="margin: 0;" src="/assets/img/vip/vip{{Auth::guard('member')->user()->getVipLevel()}}_small.png" />
                 </p>
 
             </div>

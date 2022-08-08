@@ -73,6 +73,45 @@ class Member extends Authenticatable
         return $this->save();
     }
 
+    public function getVipLevel()
+    {
+        $vipExpRequires = [
+            0,
+            Setting::get('vip1-exp'),
+            Setting::get('vip2-exp'),
+            Setting::get('vip3-exp'),
+            Setting::get('vip4-exp'),
+            Setting::get('vip5-exp'),
+            Setting::get('vip6-exp'),
+            Setting::get('vip7-exp'),
+            Setting::get('vip8-exp'),
+        ];
+        $vipExp = $this->VIPExp;
+        foreach ($vipExpRequires as $i => $expRequire) {
+            if ($vipExp < $expRequire) {
+                return $i - 1;
+            }
+        }
+        return $i;
+    }
+
+    public function getVipBonus()
+    {
+        $vipBonuses = [
+            0,
+            Setting::get('vip1-bonus'),
+            Setting::get('vip2-bonus'),
+            Setting::get('vip3-bonus'),
+            Setting::get('vip4-bonus'),
+            Setting::get('vip5-bonus'),
+            Setting::get('vip6-bonus'),
+            Setting::get('vip7-bonus'),
+            Setting::get('vip8-bonus'),
+        ];
+        $vipLevel = $this->getVipLevel();
+        return $vipBonuses[$vipLevel];
+    }
+
 //    public function coinAdminLog()
 //    {
 //        return $this->setConnection('sqlsrv')->belongsTo('App\CoinLog');

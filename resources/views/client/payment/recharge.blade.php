@@ -144,9 +144,9 @@
                     <div class="card-body">
                         {!! $momoQr !!}
 						<br>
-                        Chuyển khoản MOMO tới số : <b>{{$config['payment_momo_phone']}}</b> <br>
-                        Tên Tài Khoản : <b>{{$config['payment_momo_author']}}</b><br>
-                        Nội dung : <b>{{Auth::guard('member')->user()->Email}}</b><br>
+                        Chuyển khoản MOMO tới số : <b>{{ $config['payment_momo_phone'] }}</b> <br>
+                        Tên Tài Khoản : <b>{{ $config['payment_momo_author'] }}</b><br>
+                        Nội dung : <b>{{ env('MOMO_COMMENT_PREFIX') }} {{ Auth::guard('member')->user()->Email }}</b><br>
                         <br>
 						<b>
                             <font color="blue">Vui lòng kích hoạt 2FA để bảo về tài khoản.</font>

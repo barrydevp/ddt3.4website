@@ -208,16 +208,17 @@ class AccountController extends Controller
 			  )
 			);
 			$context = stream_context_create($options);
-
+            $xu = $coin * Setting::get('he-so-doi-coin');
+            $xu += $xu * $member->getVipBonus() / 100;
             $content = file_get_contents(
                 trim($server->LinkRequest, '/')
                 . "/ChargeMoney.aspx?content="
                 . $chargeID
                 . "|" . $member->Email
-                . "|" . ($coin * Setting::get('he-so-doi-coin'))
+                . "|" . $xu
                 . "|0" //payway
                 . "|.00" //needMoney
-                . "|" . md5($chargeID.$member->Email.($coin * Setting::get('he-so-doi-coin')).'0'.'.00'.env('CHARGE_KEY'))
+                . "|" . md5($chargeID.$member->Email.$xu.'0'.'.00'.env('CHARGE_KEY'))
                 . "&nickname=" . $playerId
             ,false, $context);
             if (substr($content, 0, 1) === "0") {

@@ -16,6 +16,14 @@
                         <span style="width: 25%;">Coin:</span>
                         <span>{{Auth::guard('member')->user()->Money}} Coin</span>
                     </label>
+                    <label>
+                        <span style="width: 25%;">Vip:</span>
+                        <span><img style="margin: 0;" src="/assets/img/vip/vip{{Auth::guard('member')->user()->getVipLevel()}}_big.png" /> (Bonus {{Auth::guard('member')->user()->getVipBonus()}}% khi chuyển xu)</span>
+                    </label>
+                    <label>
+                        <span style="width: 25%;">Exp Vip:</span>
+                        <span>{{Auth::guard('member')->user()->VIPExp}}</span>
+                    </label>
                      <label>
                         <span style="width: 25%;">Email:</span>
                      @if(!Auth::guard('member')->user()->VerifiedEmail)
@@ -249,7 +257,9 @@
             $(document).on('input', '#txtCoinConvert', function(){
                 let count = parseInt($("#txtCoinConvert").val());
                 if(count >= 1000){
-                    $("#txtMoneyReceive").val(count * heSoCoin);
+                    let coin = count * heSoCoin;
+                    coin += coin * xuBonus / 100;
+                    $("#txtMoneyReceive").val(coin);
                 }
             });
 

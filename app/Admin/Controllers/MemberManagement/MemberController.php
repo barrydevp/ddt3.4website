@@ -139,6 +139,8 @@ class MemberController extends AdminController
             $allBonusMoney = $systemBonusMoney + $individualBonusMoney;
             $moneyWillBeCharge = round(($money + $allBonusMoney) * $heSoATM );
             $member->Money += $moneyWillBeCharge;
+            $vipExp = $money * Setting::get('vip-exp-rate');
+            $member->VIPExp += $vipExp;
         }
         else {
             $member->Money -= round(abs($money));
@@ -146,6 +148,8 @@ class MemberController extends AdminController
                 $money -= $member->Money;
             }
             $member->Money = max(0, $member->Money);
+            $vipExp = $money * Setting::get('vip-exp-rate');
+            $member->VIPExp += $vipExp;
         }
 
         $coinLog = new CoinLog();

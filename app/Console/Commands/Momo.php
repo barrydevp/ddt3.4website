@@ -23,7 +23,7 @@ class Momo extends Command
      *
      * @var string
      */
-    protected $description = 'Fetch momo payment to add coin every 30s';
+    protected $description = 'Fetch momo payment to add coin every 1m';
 
     /**
      * Create a new command instance.
@@ -63,24 +63,30 @@ class Momo extends Command
                 if ($status == 999) {
                     $comment = (empty($transaction['comment']) || is_array($transaction['comment'])) ? '' : $transaction['comment'];
                     if (!empty($comment)) {
-                        $member = Member::where('Email', strtolower($comment))->first();
-                        if (!empty($member)) {
-                            $money = $transaction['amount'];
-							$heSoATM = Setting::get('he-so-atm');
-							$bonus = Setting::get('charge-bonus');
-							 //Calculate rate & money
-        $allBonusMoney = 0;
-		//tienKhuyenMai = (tongtien * phantram) /100
-		$systemBonusMoney = $money * floatval($bonus * 100)/100;
-		$individualBonusMoney = $money * floatval($individualBonus*100/100);
-		$allBonusMoney = $systemBonusMoney + $individualBonusMoney;
-		$moneyWillBeCharge = round(($money + $allBonusMoney) * $heSoATM );
-		$member->Money += $moneyWillBeCharge;
-                            //$member->Money += floor($amount * Setting::get('he-so-atm'));
-                            DB::connection($member->getConnectionName())->beginTransaction();
-                            if (!$member->save()) {
-                                DB::connection($member->getConnectionName())->rollBack();
-                                continue;
+                        $prefix = substr($comment, 0, 3);
+                        if ($prefix == env('MOMO_COMMENT_PREFIX', ' NO SERVER ').' ') {
+                            $email = substr($comment, 3);
+                            $member = Member::where('Email', strtolower(trim($email)))->first();
+                            if (!empty($member)) {
+                                $money = $transaction['amount'];
+                                $heSoATM = Setting::get('he-so-atm');
+                                $bonus = Setting::get('charge-bonus');
+                                //Calculate rate & money
+                                $allBonusMoney = 0;
+                                //tienKhuyenMai = (tongtien * phantram) /100
+                                $systemBonusMoney = $money * floatval($bonus * 100)/100;
+                                $individualBonusMoney = 0;
+                                $allBonusMoney = $systemBonusMoney + $individualBonusMoney;
+                                $moneyWillBeCharge = round(($money + $allBonusMoney) * $heSoATM );
+                                $member->Money += $moneyWillBeCharge;
+                                $vipExp = $money * Setting::get('vip-exp-rate');
+                                $member->VIPExp += $vipExp;
+                                //$member->Money += floor($amount * Setting::get('he-so-atm'));
+                                DB::connection($member->getConnectionName())->beginTransaction();
+                                if (!$member->save()) {
+                                    DB::connection($member->getConnectionName())->rollBack();
+                                    continue;
+                                }
                             }
                         }
                     }
@@ -107,7 +113,7 @@ class Momo extends Command
                         DB::connection($member->getConnectionName())->commit();
                     }
                     $transInDb->push($payment);
-                    Cache::put('momo_histories', $transInDb);
+                    Cache::put('momo_histories', $transInDb, 0);
                 }
             }
         }
