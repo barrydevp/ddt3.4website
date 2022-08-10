@@ -30,7 +30,7 @@ class OtherLauncherController extends Controller
             if($member->IsBan == 1)
                 return response('Tài khoản của bạn đã bị khoá');
 
-            return response($member->VIPLevel . ':' . $member->Money);
+            return response($member->getVipLevel() . ':' . $member->Money);
         }
         return response('Đăng nhập không hợp lệ!');
     }
@@ -198,7 +198,7 @@ class OtherLauncherController extends Controller
                 return response('Số xu tối đa bạn có thể đổi trong hôm nay là '.(intval($totalChangeAllowed) - $totalChanged));
             return response('Bạn đã đạt tối đa số xu nạp cho phép trong hôm nay, hãy quay lại vào ngày mai!');
         }
-		
+
         $player = Player::on($serverConnection)->select('UserID', 'NickName')
             ->where('UserID', $playerId)
             ->first();
@@ -220,16 +220,17 @@ class OtherLauncherController extends Controller
                 )
             );
             $context = stream_context_create($options);
-
+            $xu = $coin * Setting::get('he-so-doi-coin');
+            $xu += $xu * $member->getVipBonus() / 100;
             $content = file_get_contents(
                 trim($server->LinkRequest, '/')
                 . "/ChargeMoney.aspx?content="
                 . $chargeID
                 . "|" . $member->Email
-                . "|" . ($coin * Setting::get('he-so-doi-coin'))
+                . "|" . $xu
                 . "|0" //payway
                 . "|.00" //needMoney
-                . "|" . md5($chargeID.$member->Email.($coin * Setting::get('he-so-doi-coin')).'0'.'.00'.env('CHARGE_KEY'))
+                . "|" . md5($chargeID.$member->Email.$xu.'0'.'.00'.env('CHARGE_KEY'))
                 . "&nickname=" . $player->UserID
                 ,false, $context);
             if (substr($content, 0, 1) === "0") {

@@ -56,8 +56,8 @@ class AuthenticateController extends Controller
             'Fullname' => $request->input('Fullname'),
             'Money' => 0,
             'TimeCreate' => time(),
-//            'IPCreate' => $request->ip(), //Without antiddos.vn
-            'IPCreate' => $request->header('x-real-ip'),
+            'IPCreate' => $request->ip(), //Without antiddos.vn
+//            'IPCreate' => $request->header('x-real-ip'),
             'MoneyLock' => 0,
         ]);
         if (!$newMember){

@@ -196,8 +196,8 @@ class AccountController extends Controller
         DB::connection('sqlsrv_mem')->beginTransaction();
         $memHistory = new MemberHistory();
         if(
-//            $memHistory->memberChargeMoneyLog($member->UserID, $coin, $server->ServerName, $request->ip()) && //Without AntiDDos.vn
-            $memHistory->memberChargeMoneyLog($member->UserID, $coin, $server->ServerName, $request->header('x-real-ip')) &&
+            $memHistory->memberChargeMoneyLog($member->UserID, $coin, $server->ServerName, $request->ip()) && //Without AntiDDos.vn
+//            $memHistory->memberChargeMoneyLog($member->UserID, $coin, $server->ServerName, $request->header('x-real-ip')) &&
             $member->chargeMoney($coin)
         ){
             $chargeID = md5(uniqid());
@@ -395,7 +395,8 @@ class AccountController extends Controller
             DB::connection('sqlsrv_mem')->beginTransaction();
             $mem_history = new MemberHistory();
             if (
-                $mem_history->memberChangeNickNameLog($member->UserID, $previousNickName, $newNickName ,$PRICE_CHANGE_NAME, $server->ServerName, $request->header('x-real-ip'))
+                $mem_history->memberChangeNickNameLog($member->UserID, $previousNickName, $newNickName ,$PRICE_CHANGE_NAME, $server->ServerName, $request->ip()) //without antiddos.vn
+//                $mem_history->memberChangeNickNameLog($member->UserID, $previousNickName, $newNickName ,$PRICE_CHANGE_NAME, $server->ServerName, $request->header('x-real-ip'))
                 &&
                 $member->chargeMoney($PRICE_CHANGE_NAME)
             ) {
