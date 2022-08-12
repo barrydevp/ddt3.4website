@@ -252,13 +252,16 @@
 <script src="assets/js/slide.js"></script>
 
 <script type="text/javascript">
-    function reloadCaptcha(){
+    function reloadCaptcha(elId = null){
+        if (elId == null) {
+            elId = 'captcha_img_src';
+        }
         $.ajax({
             url: "{{route('ajax-get-captcha-html')}}",
             type: "GET",
             dateType: "text",
             success: function(t) {
-                $("#captcha_img_src").attr("src", t);
+                $("#"+elId).attr("src", t);
             },
             error: function (t){
                 console.log("ERROR WHILE RECREATE CAPTCHA");

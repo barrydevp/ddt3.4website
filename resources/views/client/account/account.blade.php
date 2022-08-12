@@ -108,8 +108,12 @@
                     </div>
                     <div class="button-functional-account">
                         <a class="item animElement slide-left" id="changeNickNameCaller"
-                           style="background-color: rgb(245 0 158); border-color: rgb(245 0 158);">
+                           style="background-color: #f5009f; border-color: #f5009f;">
                             <img src="/assets/svgs/bold.svg" style="fill:white;" alt="doi_ten"> Đổi tên
+                        </a>
+                        <a class="item animElement slide-left" id="checkinCaller"
+                           style="background-color: #f5009f; border-color: #f5009f;">
+                            <img src="/assets/svgs/user-check.svg" style="fill:white;" alt="checkin"> Điểm danh
                         </a>
                     </div>
                 </form>
@@ -135,6 +139,11 @@
             if(typeDirect == 'convertCoin'){
                 $(function() {
                     $('#convertCoinCaller').click();
+                });
+            }
+            if(typeDirect == 'checkin'){
+                $(function() {
+                    $('#checkinCaller').click();
                 });
             }
             window.history.replaceState({}, document.title, "{{route('view-account')}}");
@@ -383,6 +392,64 @@
 
                     }
                 });
+            });
+
+            //checkin
+            $("#checkinCaller").click(function (){
+                $("#dynamicContentView").html(`<section class="box register"><div class="title-new"><h1 style="color: #c3332a">ĐANG TẢI TRANG...</h1></div></section>`);
+                $.ajax({
+                    url: "{{route('ajax-view-checkin')}}",
+                    type: "get",
+                    dateType: "json",
+                    success: function(t) {
+                        let html = t;
+                        $("#dynamicContentView").html(html);
+                    },
+                    error: function (t){
+
+                    }
+                });
+            });
+
+            $(document).on('change', '#checkin_txtServer', function(){
+                $("#checkin_txtPlayerNickName").val("");
+                var serverId = $("#checkin_txtServer").val();
+                if (serverId != null && serverId != 0) {
+                    $("#checkin_txtPlayerNickName").val("Đang tìm kiếm tên nhân vật");
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        url: "{{route('ajax-get-player-nickname')}}",
+                        type: "POST",
+                        dateType: "json",
+                        data: {
+                            serverId: serverId,
+                        },
+                        success: function(t) {
+                            if (typeof t.nickname != 'undefined') {
+                                $("#checkin_txtPlayerNickName").val(t.nickname);
+                                $("#checkin_txtPlayerNickName").removeClass('d-none');
+                                $("#checkin_selectPlayerNickName").addClass('d-none');
+                            } else if (typeof t.msg != 'undefined') {
+                                $("#checkin_txtPlayerNickName").val(t.msg);
+                                $("#checkin_txtPlayerNickName").removeClass('d-none');
+                                $("#checkin_selectPlayerNickName").addClass('d-none');
+                            } else {
+                                $("#checkin_txtPlayerNickName").addClass('d-none');
+                                var options = '';
+                                t.forEach(function (p) {
+                                    options += '<option value="' + p.id + '">'+p.nickname+'</option>';
+                                });
+                                $("#checkin_selectPlayerNickName").html(options);
+                                $("#checkin_selectPlayerNickName").removeClass('d-none');
+                            }
+                        },
+                        error: function (t){
+                            $("#checkin_txtPlayerNickName").val(t.responseJSON.msg)
+                        }
+                    });
+                }
             });
 
            /**
@@ -911,6 +978,74 @@
                             $(".errors-change-nickname-form").show();
                         }
                         $('#changeNickNameFrm').trigger("reset");
+                    }
+                });
+            });
+
+            $(document).on('click', '#checkinBtn', function(){
+                let serverId = parseInt($('#checkin_txtServer :selected').val());
+                let txtCaptcha = $("#checkin_txtCaptcha").val();
+                let isPassed = true;
+                let playerId = 0;
+                if (!$("#checkin_selectPlayerNickName").hasClass('d-none')) {
+                    playerId = $("#checkin_selectPlayerNickName").val();
+                }
+
+                $(".errors-checkin-form").html("");
+                if(serverId == 0 || serverId == null){
+                    $(".errors-checkin-form").html("Vui lòng chọn server");
+                    $(".errors-checkin-form").show();
+                    isPassed = false;
+                }
+                if(!isPassed){
+                    return;
+                }
+
+                //Turn off error badge
+                $(".errors-checkin-form").html("");
+                $(".errors-checkin-form").hide();
+
+                $(".errors-checkin-form").css('color', 'orange');
+                $(".errors-checkin-form").html('Đang xử lý, vui lòng đợi trong giây lát...<img src="/assets/img/loader.gif" style="width: 16px;height: 16px;"/>');
+                $(".errors-checkin-form").show();
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: "{{route('ajax-checkin')}}",
+                    type: "POST",
+                    dateType: "json",
+                    data: {
+                        server_id: serverId,
+                        captcha: txtCaptcha,
+                        player_id: playerId
+                    },
+                    success: function(t) {
+                        let msg = t.msg;
+                        $(".errors-checkin-form").css('color','green');
+                        $(".errors-checkin-form").html(msg);
+                        $(".errors-checkin-form").show();
+                        $('#checkinFrm').trigger("reset");
+                        reloadCaptcha();
+
+                    },
+                    error: function (t){
+                        reloadCaptcha();
+                        if (t.status == 422){
+                            let errorMsg = "Điểm danh không thành công: </br>";
+                            $.each( t.responseJSON.errors, function( key, value) {
+                                errorMsg += ` - ${value} </br>`;
+                            });
+                            $(".errors-checkin-form").css('color','red');
+                            $(".errors-checkin-form").html(errorMsg);
+                            $(".errors-checkin-form").show();
+                        }
+                        else if(t.status = 400){
+                            $(".errors-checkin-form").css('color','red');
+                            $(".errors-checkin-form").html(t.responseJSON.msg);
+                            $(".errors-checkin-form").show();
+                        }
+                        $('#checkinFrm').trigger("reset");
                     }
                 });
             });

@@ -143,19 +143,19 @@ class SendItemForm extends Form
             })->when(1003, function (Form $form) {
                 $form->multipleSelect('User_1003','Tài khoản: ')->placeholder('Nhập vào tên nhân vật hoặc tên tài khoản để tìm kiếm')->ajax('api/get-list-player?server_id=1003');
             })->when(1004, function (Form $form) {
-                $form->multipleSelect('User_1004','Tài khoản: ')->placeholder('Nhập vào tên nhân vật hoặc tên tài khoản để tìm kiếm')->ajax('api/get-list-player?server_id=1003');
+                $form->multipleSelect('User_1004','Tài khoản: ')->placeholder('Nhập vào tên nhân vật hoặc tên tài khoản để tìm kiếm')->ajax('api/get-list-player?server_id=1004');
             })->when(1005, function (Form $form) {
-                $form->multipleSelect('User_1005','Tài khoản: ')->placeholder('Nhập vào tên nhân vật hoặc tên tài khoản để tìm kiếm')->ajax('api/get-list-player?server_id=1004');
+                $form->multipleSelect('User_1005','Tài khoản: ')->placeholder('Nhập vào tên nhân vật hoặc tên tài khoản để tìm kiếm')->ajax('api/get-list-player?server_id=1005');
             })->when(1006, function (Form $form) {
-                $form->multipleSelect('User_1006','Tài khoản: ')->placeholder('Nhập vào tên nhân vật hoặc tên tài khoản để tìm kiếm')->ajax('api/get-list-player?server_id=1005');
+                $form->multipleSelect('User_1006','Tài khoản: ')->placeholder('Nhập vào tên nhân vật hoặc tên tài khoản để tìm kiếm')->ajax('api/get-list-player?server_id=1006');
             })->when(1007, function (Form $form) {
-                $form->multipleSelect('User_1007','Tài khoản: ')->placeholder('Nhập vào tên nhân vật hoặc tên tài khoản để tìm kiếm')->ajax('api/get-list-player?server_id=1006');
+                $form->multipleSelect('User_1007','Tài khoản: ')->placeholder('Nhập vào tên nhân vật hoặc tên tài khoản để tìm kiếm')->ajax('api/get-list-player?server_id=1007');
             })->when(1008, function (Form $form) {
-                $form->multipleSelect('User_1008','Tài khoản: ')->placeholder('Nhập vào tên nhân vật hoặc tên tài khoản để tìm kiếm')->ajax('api/get-list-player?server_id=1007');
+                $form->multipleSelect('User_1008','Tài khoản: ')->placeholder('Nhập vào tên nhân vật hoặc tên tài khoản để tìm kiếm')->ajax('api/get-list-player?server_id=1008');
             })->when(1009, function (Form $form) {
-                $form->multipleSelect('User_1009','Tài khoản: ')->placeholder('Nhập vào tên nhân vật hoặc tên tài khoản để tìm kiếm')->ajax('api/get-list-player?server_id=1008');
+                $form->multipleSelect('User_1009','Tài khoản: ')->placeholder('Nhập vào tên nhân vật hoặc tên tài khoản để tìm kiếm')->ajax('api/get-list-player?server_id=1009');
             })->when(1010, function (Form $form) {
-                $form->multipleSelect('User_1010','Tài khoản: ')->placeholder('Nhập vào tên nhân vật hoặc tên tài khoản để tìm kiếm')->ajax('api/get-list-player?server_id=1009');
+                $form->multipleSelect('User_1010','Tài khoản: ')->placeholder('Nhập vào tên nhân vật hoặc tên tài khoản để tìm kiếm')->ajax('api/get-list-player?server_id=1010');
             })->help('ServerID phải nằm trong khoản từ 1001 -> 1010 (Tối đa 10 Server)');
 
         $this->divider();

@@ -145,7 +145,7 @@ Route::group([
     $router->resource('event-competes', EventCompeteManagement\EventCompeteController::class);
     //Compete Event Award
     $router->resource('event-award-competes', EventCompeteManagement\EventAwardCompeteController::class);
-
+    $router->resource('checkin-award', CheckinManagement\CheckinController::class);
     /*
      * HELPERS API
      */

@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Client;
 
+use App\CheckinGoods;
 use App\EmailVerify;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AjaxPublic\CheckValidEmailRequest;
 use App\Http\Requests\Client\ChangeEmailRequest;
 use App\Http\Requests\Client\ChangeNickName\ChangeNickNameRequest;
 use App\Http\Requests\Client\ChangePhoneNumberRequest;
+use App\Http\Requests\Client\CheckinRequest;
 use App\Http\Requests\Client\SendCodeToChangeVerifiedEmailRequest;
 use App\Http\Requests\Client\SendVerifyCodeToEmailRequest;
 use App\Http\Requests\Cliet\ConvertCoinRequest;
@@ -17,6 +19,7 @@ use App\Member;
 use App\MemberHistory;
 use App\Notifications\VerifyEmailNotification;
 use App\Player;
+use App\PlayerCheckin;
 use App\ServerList;
 use App\Setting;
 use Carbon\Carbon;
@@ -418,5 +421,146 @@ class AccountController extends Controller
         else{
             return response()->json(['msg'=>'Lỗi: Tên nhân vật đã tồn tại!'], 400);
         }
+    }
+
+    public function showCheckin()
+    {
+        $serverList = ServerList::select('ServerID', 'ServerName')->get();
+        //load items
+        $goods = CheckinGoods::where('Status', 1)->get();
+        return view('client.account.checkin', compact('serverList', 'goods'));
+    }
+
+    public function checkin(CheckinRequest $request)
+    {
+        $member = $request->user('member');
+        $serverId = $request->input('server_id');
+        $server = ServerList::findOrFail($serverId);
+        $playerId = $request->input('player_id');
+        if (!empty($playerId)) {
+            $player = Player::on($server->Connection)->select('UserID', 'UserName', 'Grade')
+                ->where("UserID", $playerId)
+                ->first();
+        } else {
+            $player = Player::on($server->Connection)->select('UserID', 'UserName', 'Grade')
+                ->where("UserName", $member->Email)
+                ->first();
+        }
+        if (empty($player)) {
+            return response()->json(['msg' => 'Nhân vật không tồn tại!'], 500);
+        }
+        $levelRequired = Setting::get('checkin-level-required', 20);
+        if ($player->Grade < $levelRequired) {
+            return response()->json(['msg' => 'Cấp độ của nhân vật phải từ '.$levelRequired.' trở lên!'], 500);
+        }
+        $playerId = $player->UserID;
+        $checkedIn = PlayerCheckin::where('PlayerID', $playerId)->first();
+        if (empty($checkedIn)) {
+            $checkedIn = new PlayerCheckin();
+            $checkedIn->PlayerID = $playerId;
+            $checkedIn->Time = 0;
+            $checkedIn->LastCheckedIn = null;
+        }
+        if (!empty($checkedIn->LastCheckedIn)) {
+            $date = date('Y-m-d', strtotime($checkedIn->LastCheckedIn));
+            if ($date >= date('Y-m-d')) {
+                return response()->json(['msg' => 'Hôm nay đã điểm danh rồi!']);
+            }
+            $month = date('m', strtotime($checkedIn->LastCheckedIn));
+            if (date('m') > $month) {
+                $checkedIn->Time = 0;
+            }
+        }
+        $checkedIn->Time++;
+        $checkedIn->LastCheckedIn = date('Y-m-d H:i:s');
+        $goods = CheckinGoods::where('Status', 1)->where('Time', $checkedIn->Time)->get();
+        if (!empty($goods) && $goods->count() > 0) {
+            $items = [];
+            $coin = 0;
+            foreach ($goods as $item) {
+                $items[] = [
+                    'id' => $item->ItemID,
+                    'count' => $item->Count,
+                    'date' => $item->ValidDate,
+                    'strength' => $item->StrengthenLevel,
+                    'attack' => $item->AttackCompose,
+                    'defend' => $item->DefendCompose,
+                    'agility' => $item->AgilityCompose,
+                    'luck' => $item->LuckCompose,
+                    'bind' => $item->IsBind,
+                ];
+                if (!empty($item->Coin)) {
+                    $coin += $item->Coin;
+                }
+            }
+            $sendMail = $this->sendMailAndItem($server, [$playerId], $items, 'Quà điểm danh', 'Chúc mừng bạn nhận được quà điểm danh');
+            if ($sendMail !== true) {
+                return response()->json(['msg' => $sendMail]);
+            }
+            if ($coin > 0) {
+                $member->Money += $coin;
+                $member->save();
+            }
+            if ($checkedIn->save()) {
+                return response()->json(['msg' => 'Điểm danh thành công!']);
+            }
+        }
+        return response()->json(['msg' => 'Điểm danh thất bại!']);
+    }
+
+    private function sendMailAndItem($server, $players, $items, $title, $content)
+    {
+        $connection = $server->Connection;
+        $baseurl = $server->LinkRequest.'SendMailAndItem.aspx';
+        $number_of_mail = floor(count($items) / 5) + 1;
+        $uri = '?title='.urlencode($title).'&content='.urlencode($content);
+        $error = [];
+        foreach ($players as $player_id) {
+            $player = Player::on($connection)->select('UserID')->where('UserID', (int) $player_id)->first();
+            if (empty($player)) {
+                continue;
+            }
+            $url = $baseurl.$uri.'&user_id='.$player_id;
+            for ($mail_num = 0; $mail_num < $number_of_mail; $mail_num++) {
+                $_uri = $url;
+                $_uri .= '&gold=0&money=0';
+                $_uri .= '&str=';
+                for ($item_num = max($mail_num * 5, 0); $item_num < min(($mail_num+1) * 5, count($items)); $item_num++) {
+                    $item = $items[$item_num];
+
+                    if (empty($item['id'])) {
+                        continue;
+                    }
+                    if (is_array($item['id'])) {
+                        $item['id'] = $item['id'][0];
+                    }
+                    $item_param = [
+                        $item['id'],
+                        max(intval($item['count']), 1),
+                        intval($item['date']),
+                        intval($item['strength']),
+                        intval($item['attack']),
+                        intval($item['defend']),
+                        intval($item['agility']),
+                        intval($item['luck']),
+                        intval($item['bind']),
+                    ];
+                    $_uri .= implode(',', $item_param).'|';
+                }
+//                echo $_uri.'<br>';
+//                return;
+                $result = file_get_contents($_uri);
+                //echo $result;
+                //return;
+                if ($result !== "1") {
+                    $error[] = "Lỗi nhân vật ".$player->NickName;
+                }
+            }
+        }
+        if (!empty($error)) {
+            return 'Đã có lỗi trong quá trình gửi thư. '.implode('<br>', $error);
+        }
+
+        return true;
     }
 }

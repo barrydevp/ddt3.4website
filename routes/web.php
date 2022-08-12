@@ -102,6 +102,9 @@
                 Route::get('/change-nickname', 'Client\AccountController@showChangeNickName')->name('ajax-view-change-nickname');
                 Route::post('/check-is-duplicate-nickname', 'Client\AjaxHelpersController@isDuplicateNewNickName')->name('ajax-check-duplicate-nickname');
                 Route::post('/change-nickname', 'Client\AccountController@changeNickName')->name('ajax-change-nickname');
+
+                Route::get('/checkin', 'Client\AccountController@showCheckin')->name('ajax-view-checkin');
+                Route::post('/checkin', 'Client\AccountController@checkin')->name('ajax-checkin');
             });
 
             Route::prefix('/ajax-helpers')->group(function (){

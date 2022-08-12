@@ -5,12 +5,15 @@
     @include('client.related.slide')
     @include('client.related.news')
     {{-- LAUNCHER --}}
-    <div class="cards slide-bottom time-300" style="position: fixed; right: 10px; top: calc(50% - 120px);">
+    <div class="cards slide-bottom time-300" style="position: fixed; right: 10px; top: calc(50% - 140px);">
         <a href="{{$config['launcher_download_url']}}" target="_BLANK" class="right">
             <img src="assets/img/3.png">
         </a>
         <a href="{{$config['uc_download_url']}}" class="right" download>
             <img src="assets/img/uc.jpg">
+        </a>
+        <a href="/account?type=checkin" class="right">
+            <img src="assets/img/diem_danh_nhan_qua.png">
         </a>
     </div>
     <section class="box guia">
