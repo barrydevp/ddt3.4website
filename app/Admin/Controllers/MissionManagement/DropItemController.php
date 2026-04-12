@@ -38,7 +38,7 @@ class DropItemController extends AdminController
         $grid->model()->with('DropCondiction');
 
         $grid->column('Id', __('Id'));
-        $grid->column('DropId', 'DropId');
+        $grid->column('DropId', 'DropId')->sortable();
         $grid->column('_Para1_','Para1')->display(function () use ($dropCondiction, $missionInfo){
             $para1 = null;
             //Get all para1
@@ -100,9 +100,14 @@ class DropItemController extends AdminController
         $grid->expandFilter();
         $grid->filter(function($filter){
             $filter->disableIdFilter();
-            $filter->equal('DropId','Tìm kiếm ải phó bản')->select()->ajax('/admin/api/get-mission-info-for-drop');
+            $filter->equal('DropId','Loc theo DropId')->integer();
 
         });
+//        $grid->filter(function($filter){
+//            $filter->disableIdFilter();
+//            $filter->equal('DropId','Tìm kiếm ải phó bản')->select()->ajax('/admin/api/get-mission-info-for-drop');
+//
+//        });
         return $grid;
     }
 

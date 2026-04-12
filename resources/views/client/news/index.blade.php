@@ -21,11 +21,7 @@
                     {!! $news->Content !!}
                 </div>
             </div>
-{{--            <div class="box list related animElement slide-top">--}}
-{{--                <ul>--}}
-{{--                    <li class="title">TIN LIÊN QUAN</li>--}}
-{{--                </ul>--}}
-{{--            </div>--}}
+
         </section>
     </section>
 

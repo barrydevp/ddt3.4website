@@ -20,15 +20,20 @@ class AttractiveAwardController extends AdminController
     protected $title = 'Phần thưởng của hấp dẫn';
 
     private $activityType = [
-        1 => 'Mốc level ',
-        2 => 'Mốc cường hoá',
-        3 => 'Mốc tiêu xu',
-        4 => 'Mốc nạp xu',
-        5 => 'Mốc level VIP',
-        6 => 'Mốc quà lực chiến',
-        7 => 'Mốc Nạp xu đặc biệt',
-        8 => 'Mốc Tiêu xu đặc biệt',
-        9 => 'Nạp lần đầu'
+        // 1 => 'Mốc level ',
+        // 2 => 'Mốc cường hoá',
+        // 3 => 'Mốc tiêu xu',
+        // 4 => 'Mốc nạp xu',
+        // 5 => 'Mốc level VIP',
+        // 6 => 'Mốc quà lực chiến',
+        // 7 => 'Mốc Nạp xu đặc biệt',
+        // 8 => 'Mốc Tiêu xu đặc biệt',
+        // 9 => 'Nạp lần đầu'
+		1 => 'Mốc level VIP',
+        2 => 'Mốc tiêu xu',
+        3 => 'Mốc nạp xu',
+        4 => 'Mốc Nạp xu đặc biệt',
+        5 => 'Mốc Tiêu xu đặc biệt'
     ];
 
     /**

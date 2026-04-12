@@ -59,24 +59,34 @@ class EventRewardGoods extends Model
     public function getActivityTypeText()
     {
         switch ($this->ActivityType){
-            case 1:
-                return 'Mốc level ';
-            case 2:
-                return 'Mốc cường cmn hoá';
+            // case 1:
+                // return 'Mốc level ';
+            // case 2:
+                // return 'Mốc cường cmn hoá';
+            // case 3:
+                // return 'Mốc tiêu xu';
+            // case 4:
+                // return 'Mốc nạp xu';
+            // case 5:
+                // return 'Mốc level VIP';
+            // case 6:
+                // return 'Mốc quà LC';
+            // case 7:
+                // return 'Nạp xu đặc biệt';
+            // case 8:
+                // return 'Tiêu xu đặc biệt';
+            // case 9:
+                // return 'Nạp lần đầu';
+			case 1:
+				return 'Mốc level VIP';
+			case 2:
+				return 'Mốc tiêu xu';
             case 3:
-                return 'Mốc tiêu xu';
+				return 'Mốc nạp xu';
             case 4:
-                return 'Mốc nạp xu';
+                return 'Mốc Tiêu xu đặc biệt';
             case 5:
-                return 'Mốc level VIP';
-            case 6:
-                return 'Mốc quà LC';
-            case 7:
-                return 'Nạp xu đặc biệt';
-            case 8:
-                return 'Tiêu xu đặc biệt';
-            case 9:
-                return 'Nạp lần đầu';
+				return 'Mốc Nạp xu đặc biệt';
         }
     }
 }

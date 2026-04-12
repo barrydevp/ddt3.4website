@@ -56,7 +56,7 @@
 
         //Select server & Playing games
         Route::get('/select-server', 'Client\PlayGameController@showSelectServerListView')->name('view-select-server');
-        Route::get('/play/{serverId}', 'Client\PlayGameController@playGame')->name('view-play-game')->middleware('server_game_maintenance');
+        Route::get('/play/{serverId}/{debug?}', 'Client\PlayGameController@playGame')->name('view-play-game')->middleware('server_game_maintenance');
 
         // authenticated member routes here
         Route::group( ['middleware' => 'two_factor'],function() {

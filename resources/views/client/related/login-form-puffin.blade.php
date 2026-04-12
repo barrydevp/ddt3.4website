@@ -1,3 +1,7 @@
+<div class="play-game p-a">
+    <a href="#" class="playGame_btn js-btn-login" target="_blank"></a>
+</div>
+
 <div id="login">
 
     @auth('member')
@@ -45,7 +49,7 @@
                    placeholder="Tài Khoản" autocomplete="off">
             <input class="animElement slide-left time-300" name="password" type="password"
                    placeholder="Mật Khẩu" autocomplete="new-password">
-            <button class="login animElement slide-right" type="submit">LOGIN</button>
+            <button class="login animElement slide-right" id="loginbtn" type="submit">LOGIN</button>
             @if($errors->any())
                 <div class="footer" id="sign-in-error" style="text-align: center;font-family: 'BreeSerif'">
                     {{$errors->first()}}

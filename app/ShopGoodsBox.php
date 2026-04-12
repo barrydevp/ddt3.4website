@@ -27,12 +27,12 @@ class ShopGoodsBox extends Model
 
     public function BoxItem()
     {
-        return $this->hasOne('App\ShopGoods','TemplateID','ID');
+        return $this->hasOne('App\ShopGoods','TemplateID','ID')->withDefault();
     }
 
     public function ResourceImageColumnForId()
     {
-        if(isset($this->BoxItem)){
+        if(!empty($this->BoxItem)){
             return $this->BoxItem->ResourceImageColumn();
         }
         return '';
@@ -40,7 +40,7 @@ class ShopGoodsBox extends Model
 
     public function Item()
     {
-        return $this->hasOne('App\ShopGoods','TemplateID','TemplateId');
+        return $this->hasOne('App\ShopGoods','TemplateID','TemplateId')->withDefault();
     }
 
     public function ResourceImageColumn()

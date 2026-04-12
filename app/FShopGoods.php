@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 class FShopGoods extends Model
 {
-    protected $connection = 'sqlsrv_tank2';
+    protected $connection = 'sqlsrv_tank';
     public $table = 'Shop_Goods';
     protected $primaryKey = 'TemplateID';
     public $timestamps = false;

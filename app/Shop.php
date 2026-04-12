@@ -29,7 +29,7 @@ class Shop extends Model
 
     public function Item()
     {
-        return $this->hasOne('App\ShopGoods', 'TemplateID', 'TemplateID');
+        return $this->hasOne('App\ShopGoods', 'TemplateID', 'TemplateID')->withDefault();
     }
 
     public function ShopList()

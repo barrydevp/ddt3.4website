@@ -11,7 +11,7 @@ return [
     | login page.
     |
     */
-    'name' => 'GunGa Admin',
+    'name' => 'Quản lý gunny92',
 
     /*
     |--------------------------------------------------------------------------
@@ -22,7 +22,7 @@ return [
     | `img` tag, eg '<img src="http://logo-url" alt="Admin logo">'.
     |
     */
-    'logo' => '<b>GunGa</b> Admin',
+    'logo' => '<b>gunny92</b> Quản lý',
 
     /*
     |--------------------------------------------------------------------------

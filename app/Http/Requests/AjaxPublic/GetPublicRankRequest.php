@@ -25,7 +25,7 @@ class GetPublicRankRequest extends FormRequest
     {
         return [
             'server_id' => 'required',
-            'type'  =>'required|numeric|min:1|max:4'
+            'type'  =>'required|numeric|min:1|max:20'
         ];
     }
 }

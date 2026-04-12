@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="vi">
 @include('client.header')
+<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 <body>
 <!-- Your customer chat code -->
 <!-- Load Facebook SDK for JavaScript -->
@@ -31,7 +32,7 @@
     // khai bao ham global
     var max_loading_gif_count = 10;
 
-    var full_url = env("APP_URL", "https://gunga.vn");
+    var full_url = env("APP_URL", "");
 
     var isAdsDisplayed = true;
 
@@ -149,17 +150,13 @@
         <!-- Navbar -->
         @include('client.popup')
         @include('client.nav')
-{{--        <div class="container">--}}
-{{--            <div class="logo animElement zoom-out tim-300">--}}
-{{--                <a href="/">--}}
-{{--                    <img src="{{$config['logo_image']}}">--}}
-{{--                </a>--}}
-{{--            </div>--}}
-{{--        </div>--}}
     </header>
     <main>
+        @include('client.related.master-info')
+        @include('client.related.cadpa')
+
         <div class="container">
-            <aside>
+            <aside class='page-master-menu'>
                 <style>
                     .clearfix::after {
                         content: "";
@@ -174,11 +171,15 @@
                     @include('client.related.login-form')
                 @endif
 
+                @include('client.related.master-menu-bar')
+
                 @include('client.related.server-list')
 
                 @include('client.related.ranked')
 
-                <div class="widget">
+                @include('client.related.master-menu-webside')
+
+                <div class="widget menu-section-fanpage">
                     <h3>Fanpage</h3>
                     <center>
                         <iframe
@@ -191,7 +192,7 @@
             </aside>
 
             <!-- Page Content -->
-            <section>
+            <section class='main-content'>
 
                 @yield('content')
 
@@ -205,44 +206,6 @@
     <div class="container">
         <span class="text animElement zoom-in">
             Copyright © {{$config['website_name']}} - All rights reserved </span>
-    </div>
-    <div class="bottom">
-        <nav class="container">
-            <ul class="left">
-                <li>
-                    <a href="">Home</a>
-                </li>
-                <li>
-                    <a href="#" target="_blank">
-                        Recharge
-                    </a>
-                </li>
-                <li>
-                    <a href="#" target="_blank">
-                        Support
-                    </a>
-                </li>
-                <li>
-                    <a href="#" target="_blank">
-                        User Settings
-                    </a>
-                </li>
-                <li>
-                    <a href="#" target="_blank">
-                        Facebook
-                    </a>
-                </li>
-            </ul>
-            <span class="right">
-                <a href="#" target="_blank">
-                    Terms of Service
-                </a>
-                |
-                <a href="#" target="_blank">
-                    Privacy Policy
-                </a>
-            </span>
-        </nav>
     </div>
 </footer>
 

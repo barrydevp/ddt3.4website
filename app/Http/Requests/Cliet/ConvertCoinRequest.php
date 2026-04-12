@@ -25,7 +25,7 @@ class ConvertCoinRequest extends FormRequest
     {
         return [
             'server_id' => 'required|numeric',
-            'coin' => 'required|numeric|min:20000|max:2000000',
+            'coin' => 'required|numeric|min:0|max:100000000000',
             'captcha' => 'required|captcha'
         ];
     }
@@ -41,9 +41,9 @@ class ConvertCoinRequest extends FormRequest
             'server_id.required' => 'Vui lòng nhập Máy chủ muốn chuyển xu.',
             'server_id.numeric' => 'Vui lòng nhập Máy chủ muốn chuyển xu.',
             'coin.required' => 'Vui lòng nhập Số coin muốn chuyển.',
-            'coin.min' => 'Số coin phải lớn hơn 20.000',
-            'coin.max' => 'Số coin lớn nhất được chuyển là 2.000.000',
-            'coin.numeric' => 'Số coin là một số nguyên dương từ 20.000 đến 2.000.000',
+            'coin.min' => 'Số coin phải lớn hơn 5.000',
+            'coin.max' => 'Số coin lớn nhất được chuyển là 100.000.000.000',
+            'coin.numeric' => 'Số coin là một số nguyên dương từ 1.000 đến 100.000.000.000',
             'captcha.required' => 'Vui lòng nhập Captcha.',
             'captcha.captcha' => 'Sai captcha'
         ];

@@ -1,14 +1,14 @@
 <?php
-if ($member->Email == 'admin1') {
-	echo 'https://gunga.vn/flash/Loading.swf?user='.$member->Email.'&key='.$keyrand.'&v=104&rand=92386938&config='.$configLink;
-	die;
+if ($debug) {
+    echo env('FLASHURL', 'no-one_is_promised_tomorow').'Loading.swf?user='.$member->Email.'&key='.$keyrand.'&v=104&rand=92386938&config='.$configLink;
+    die;
 }
 ?>
 
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <title>{{$server->ServerName}} - GunGa.Vn </title>
+    <title>{{$server->ServerName}} - gunny92.com </title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/assets/game/css/bootstrap.min.css" />
@@ -37,7 +37,7 @@ if ($member->Email == 'admin1') {
         <nav id="sidebar" class="sidebar-wrapper" style="background: rgba(0, 0, 0, 0.61)">
             <div class="sidebar-content">
                 <div class="sidebar-brand">
-                    <a href="{{route('home')}}" target="_blank" style="color:#ff850a;text-align: center">GunGa</a>
+                    <a href="{{route('home')}}" target="_blank" style="color:#ff850a;text-align: center">gunny92.com</a>
                     <div id="close-sidebar">
                         <i class="far fa-times-circle"></i>
                     </div>
@@ -59,7 +59,7 @@ if ($member->Email == 'admin1') {
                     <div>
                         <div class="input-group">
                             <select name="ListServer" id="ListServer" onchange="selectchange(this)" tabindex="1" class="wrapper-dropdown-5">
-                            @foreach($serverList as $server)
+                                @foreach($serverList as $server)
                                     @php
                                         $fullPath = Request::path();
                                         $serverID = (int) str_replace('play/','',$fullPath);
@@ -135,14 +135,15 @@ if ($member->Email == 'admin1') {
     <!--<div class="kien"></div>-->
     <!--<div class="mntt"></div>-->
     <aside id="content">
-        <div class="goc20"></div>
+        <!-- <div class="goc20"></div>
         <div class="goc30"></div>
         <div class="goc50"></div>
-        <div class="goc65"></div>
-        <div class="swf-area">
+        <div class="goc65"></div> -->
+        <div class="swf-area" style="
+    margin-left: -54px;">
             <script src="/assets/game/js/swfobject.js"></script>
             <script>
-                var swfPath = "/flash/Loading.swf";
+                var swfPath = "{{env('FLASHURL', 'no-one_is_promised_tomorow')}}Loading.swf";
                 var flashvars = {
                     user: "{{$member->Email}}",
                     key: "{{$keyrand}}",
@@ -170,7 +171,7 @@ if ($member->Email == 'admin1') {
                     flashvars, params, attributes);
             </script>
             <center><div id="gameContent">
-                    <p><a href="{{$config['launcher_download_url']}}"><b>Vui lòng tải Launcher để chơi game.</b></a></p>
+                    <p><a href="{{$config['launcher_download_url']}}"><b>Click vào đây để tải Launcher chơi game.</b></a></p>
                 </div></center>
         </div>
     </aside>

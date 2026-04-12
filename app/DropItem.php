@@ -30,7 +30,7 @@ class DropItem extends Model
 
     public function Item()
     {
-        return $this->hasOne('App\ShopGoods', 'TemplateID', 'ItemId');
+        return $this->hasOne('App\ShopGoods', 'TemplateID', 'ItemId')->withDefault();
     }
 
     public function ResourceImageColumn()

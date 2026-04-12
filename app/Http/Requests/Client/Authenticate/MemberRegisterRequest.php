@@ -24,11 +24,11 @@ class MemberRegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'Email' => 'required|string|alpha_dash|max:255|unique:sqlsrv_mem.Mem_Account',
+            'Email' => 'required|string|alpha_dash|min:5|max:255|unique:sqlsrv_mem.Mem_Account',
             'Fullname' => 'required|email|max:50|unique:sqlsrv_mem.Mem_Account',
             'Password' => 'required|string|min:6',
-            'Phone' => 'required|unique:sqlsrv_mem.Mem_Account|digits:10',
-            'captcha' => 'required|captcha',
+            // 'Phone' => 'required|unique:sqlsrv_mem.Mem_Account|digits:10',
+            // 'captcha' => 'required|captcha',
         ];
     }
 
@@ -41,11 +41,13 @@ class MemberRegisterRequest extends FormRequest
             'Fullname.email' => 'Địa chỉ email không hợp lệ',
             'Password.required' => 'Bạn chưa nhập mật khẩu',
             'Password.min' => 'Mật khẩu tối thiểu phải 6 ký tự trở lên',
+            'Password.regex' => 'Mật khẩu phải chứa số, kí tự, chữ hoa và chữ thường',
             'Phone.required' => 'Bạn chưa nhập số điện thoại',
             'Phone.digits' => 'Số điện thoại không hợp lệ',
             'Phone.unique' => 'Số điện thoại đã có người đăng ký',
             'Email.required' => 'Bạn chưa nhập tên tài khoản',
             'Email.alpha_dash' => 'Tên tài khoản không hợp lệ',
+            'Email.min' => 'Tài khoản tối thiểu phải 5 ký tự trở lên',
         ];
     }
 }

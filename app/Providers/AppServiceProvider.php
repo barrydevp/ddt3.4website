@@ -8,6 +8,7 @@ use App\ServerList;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -67,6 +68,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if (env('APP_USE_HTTPS')) {
+            URL::forceScheme('https');
+        } else {
+            URL::forceScheme('http');
+        }
         $this->initGlobalVariablesAndCached();
         $this->checkCurrentCompeteEvent();
     }

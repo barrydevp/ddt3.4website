@@ -1,5 +1,5 @@
 
-<div class="widget">
+<div class="widget menu-raking-users">
     <h3>BẢNG XẾP HẠNG</h3>
     <div class="inner">
         <form id="frm-load-ranking" class="filter animElement slide-top">
@@ -15,6 +15,11 @@
                 <option value="2">Level</option>
                 <option value="3">Online</option>
                 <option value="4">Hấp Dẫn</option>
+                <option value="5">Tiêu xu</option>
+                <option value="6">Phó bản GAH</option>
+{{--                <option value="7">Phó bản BLTT</option>--}}
+{{--                <option value="8">Phó bản PDHA</option>--}}
+                <option value="9">Tự do 1-1</option>
             </select>
 
         </form>
@@ -85,6 +90,21 @@
                     case 4:
                         $("ul.listtag li.head span.right").html("Hấp dẫn")
                         break;
+                    case 5:
+                        $("ul.listtag li.head span.right").html("Tiêu xu")
+                        break;
+                    case 6:
+                        $("ul.listtag li.head span.right").html("Phó bản (GAH)")
+                        break;
+                    case 7:
+                        $("ul.listtag li.head span.right").html("Phó bản (BLTT)")
+                        break;
+                    case 8:
+                        $("ul.listtag li.head span.right").html("Phó bản (PDHA)")
+                        break;
+                    case 9:
+                        $("ul.listtag li.head span.right").html("Tự do 1-1")
+                        break;
                 }
                 // 1 === type ? $("ul.listtag li.head span.right").html("Lực chiến") : 2 === type && $("ul.listtag li.head span.right").html("Level"),
                 $.ajax({
@@ -121,6 +141,15 @@
                                     break;
                                 case 4:
                                     typeFromServer = 'charmGP';
+                                    break;
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                    typeFromServer = 'Amount';
+                                    break;
+                                case 9:
+                                    typeFromServer = 'Count';
                                     break;
                             }
                             // type == 1 ? typeFromServer = "FightPower" : typeFromServer = "Grade";

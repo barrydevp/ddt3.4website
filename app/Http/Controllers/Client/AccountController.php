@@ -28,6 +28,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Client\ChangePasswordRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
@@ -165,8 +166,8 @@ class AccountController extends Controller
         $member = $request->user('member');
         $coin = $request->input('coin');
         $coin = intval($coin);
-        $coin = max(20000, $coin);
-        $coin = min(2000000, $coin);
+        $coin = max(1000, $coin);
+        $coin = min(100000000000, $coin);
         //Get total charged for checking
         $memHistory = new MemberHistory();
 
@@ -213,8 +214,7 @@ class AccountController extends Controller
 			$context = stream_context_create($options);
             $xu = $coin * Setting::get('he-so-doi-coin');
             $xu += $xu * $member->getVipBonus() / 100;
-            $content = file_get_contents(
-                trim($server->LinkRequest, '/')
+            $reqUrl = trim($server->LinkRequest, '/')
                 . "/ChargeMoney.aspx?content="
                 . $chargeID
                 . "|" . $member->Email
@@ -222,13 +222,14 @@ class AccountController extends Controller
                 . "|0" //payway
                 . "|.00" //needMoney
                 . "|" . md5($chargeID.$member->Email.$xu.'0'.'.00'.env('CHARGE_KEY'))
-                . "&nickname=" . $playerId
-            ,false, $context);
+                . "&nickname=" . $playerId;
+            $content = file_get_contents($reqUrl,false, $context);
             if (substr($content, 0, 1) === "0") {
                 DB::connection('sqlsrv_mem')->commit();
                 return response()->json(['msg' => 'Nạp xu thành công!'], 200);
 
             } else {
+                Log::critical('Convert coin error: ' . $reqUrl. ' - Result: ' . $content);
                 DB::connection('sqlsrv_mem')->rollBack();
                 return response()->json(['msg' => 'Không thể nạp xu vào game, vui lòng thoát game và thử lại hoặc thông báo tới quản trị viên để được trợ giúp!'], 400);
             }

@@ -27,7 +27,7 @@ class ChangePasswordRequest extends FormRequest
             'oldPassword' => 'required|min:6',
             'password' => 'required|min:6|confirmed',
             'password_confirmation' => 'required|min:6',
-            'captcha' => 'required|captcha',
+            // 'captcha' => 'required|captcha',
         ];
     }
 
@@ -39,6 +39,7 @@ class ChangePasswordRequest extends FormRequest
             'oldPassword.required' => 'Bạn chưa nhập mật khẩu cũ',
             'oldPassword.min' => 'Mật khẩu cũ tối thiểu phải 6 ký tự trở lên',
             'password.required' => 'Bạn chưa nhập mật khẩu mới',
+            'password.regex' => 'Mật khẩu phải chứa số, kí tự, chữ hoa và chữ thường',
             'password.min' => 'Mật khẩu mới tối thiểu phải 6 ký tự trở lên',
             'password.confirmed' => 'Mật khẩu xác nhận không khớp',
             'password_confirmation.required' => 'Bạn chưa nhập mật khẩu xác nhận',

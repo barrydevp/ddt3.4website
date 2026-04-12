@@ -34,6 +34,14 @@ class AuthenticateController extends Controller
             $this->active2FAMode();
             if($member->IsBan == 1)
                 return response()->json(['msg' => "Tài khoản này đã bị khoá!"],401);
+            $ref = session('ref');
+            if (!empty($ref)) {
+                session(['ref' => '']);
+                $member->Email = strtolower($member->Email);
+                $member->ActiveIP = $request->ip();
+                $member->save();
+                return response()->json(['msg' => "Đăng nhập thành công", 'ref' => $ref],200);
+            }
             return response()->json(['msg' => "Đăng nhập thành công"],200);
         }
         return response()->json(['msg' => "Tài khoản hoặc mật khẩu không đúng!"],401);

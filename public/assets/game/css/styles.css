@@ -1269,7 +1269,7 @@ img {
     height: 365px;
 }
 #play #content {
-    background-image: url(/assets/game/images/playKhung.png);
+    
     background-repeat: no-repeat;
     background-position: 50%;
     width: 1560px;
@@ -1281,11 +1281,11 @@ img {
     align-content: center;
     justify-content: center;
     align-items: center;
-    padding-top: 15px;
+    
 }
 @media (max-width: 1366px) {
     #play #content {
-        background-image: url(/assets/game/images/playKhung_1366.png);
+        
         width: 1415px;
         margin-left: calc(50% - 707px);
     }

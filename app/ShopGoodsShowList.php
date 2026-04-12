@@ -24,7 +24,7 @@ class ShopGoodsShowList extends Model
 
     public function Shop()
     {
-        return $this->hasOne('App\Shop','ID','ShopId');
+        return $this->hasOne('App\Shop','ID','ShopId')->withDefault();
     }
 
     public function getTypeShop()

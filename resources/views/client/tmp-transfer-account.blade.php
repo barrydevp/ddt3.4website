@@ -45,29 +45,7 @@
         </div>
     </section>
 
-    <section class="box guia">
-        <div class="title-new">
-            <h1>Hướng dẫn</h1>
-        </div>
-        <ul class="biglist animElement slide-left">
-            <li>
-                <a href="game_guide/1">
-                    <i class="icon-controls"></i>
-                    <strong>Điều Khiển</strong>
-                    <p>Sử dụng các phím mũi tên để di chuyển nhân vật và điều chỉnh góc, phím cách dùng để bắn.
-                    </p>
-                </a>
-            </li>
-            <li>
-                <a href="game_guide/2">
-                    <i class="icon-fight-lab"></i>
-                    <strong>Đo màn hình</strong>
-                    <p>Hướng dẫn đo màn hình và lực bắn để bắn chính xác.</p>
-                </a>
-            </li>
 
-        </ul>
-    </section>
 
 @endsection
 

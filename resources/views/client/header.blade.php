@@ -4,14 +4,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="https://img.zing.vn/products/gn/favicon.ico" />
     <meta name="keywords"
-          content="gunny hoi uc, gunny cuong hoa hên xui, gunny 3.0, gunny 3.4, gunny 3.6, gunny 2012, gunny huan chuong ,gunny free, ddtank, ddtank private, gunny private, gunny lậu, gunny private, gunny miễn phí, gunny đầy đủ tính năng, gunny phó bản chuẩn zing, gunny có doanh chiến, gunny có guild chiến, gunny có tranh bá chí tôn, gunny có pet tôn ngộ không, gunny miễn phí pet tôn ngộ không, gunny, gunny lau, gunny lau moi nhat, gunny phien ban moi, gunny moi nhat, gunny dai chien 7 thanh pho, gunny lau full xu, gunnyfullxu, gunny lau co pet ton ngo khong, gunny lau mien phi pet ton ngo khong, pet ton ngo khong gunny, free pet ton ngo khong, gunny full xu, gunny cay quoc, gunny day du tinh nang, gunny full pho ban, gunny pho ban chuan, gunny pho ban do ngon">
+          content="gunny92, gunny cuong hoa hên xui, gunny 3.0, gunny 3.4, gunny 3.6, gunny 2012, gunny huan chuong ,gunny free, ddtank, ddtank private, gunny private, gunny lậu, gunny private, gunny miễn phí, gunny đầy đủ tính năng, gunny phó bản chuẩn zing, gunny có doanh chiến, gunny có guild chiến, gunny có tranh bá chí tôn, gunny có pet tôn ngộ không, gunny miễn phí pet tôn ngộ không, gunny, gunny lau, gunny lau moi nhat, gunny phien ban moi, gunny moi nhat, gunny dai chien 7 thanh pho, gunny lau full xu, gunnyfullxu, gunny lau co pet ton ngo khong, gunny lau mien phi pet ton ngo khong, pet ton ngo khong gunny, free pet ton ngo khong, gunny full xu, gunny cay quoc, gunny day du tinh nang, gunny full pho ban, gunny pho ban chuan, gunny pho ban do ngon">
     <meta name="author" content="DDT Coder">
     <meta name="description" content="Gunny phiên bản cày cuốc xu và huân chương mua đá cường hóa hên xui.">
 
-    <meta property='og:image' content='https://gunga.vn/assets/img/thumbnail.jpg' />
-    <title>GunGa.Vn | Gunny Hay Nhất 2022</title>
-    <meta property='og:title' content='GunGa.Vn | Gunny hồi ức chơi trên Mobile và PC'>
-	<meta property='og:type' content='GunGa.Vn | Gunny hồi ức chơi trên Mobile và PC 1'>
+    
+    <title>gunny92 | Phiên bản 3.0</title>
+    <meta property='og:title' content='gunny92 | Phiên bản 3.0'>
+	<meta property='og:type' content='gunny92 | Phiên bản 3.0'>
     <meta property='og:description' content='Gunny phiên bản cày cuốc xu và huân chương mua đá cường hóa hên xui.'>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 

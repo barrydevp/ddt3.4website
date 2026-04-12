@@ -16,13 +16,13 @@ class PlayGameController extends Controller
         return view('client.play-game.select-server',compact('serverList'));
     }
 
-    public function playGame(Request $request, $serverId)
+    public function playGame(Request $request, $serverId, $debug = 0)
     {
         $member = $request->user('member');
         $serverList = ServerList::all();
-		if ($member->Email == 'admin1') {
-			$serverId = 1004;
-		}
+        if ($member->Email == 'admin1') {
+            $serverId = 1004;
+        }
         $server = ServerList::findOrFail($serverId);
 
         if (empty($member) || empty($server)) {
@@ -54,7 +54,8 @@ class PlayGameController extends Controller
             'message' => $message,
             'member' => $member,
             'keyrand' => $keyRand,
-            'configLink' => $server->LinkConfig
+            'configLink' => $server->LinkConfig,
+            'debug' => $debug
         ]);
     }
 }

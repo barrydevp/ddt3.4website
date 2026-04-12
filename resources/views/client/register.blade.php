@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <section class="box register">
+    <section class="box register" id="register-section">
         <div class="title-new">
             <h1 style="color: #c3332a">ĐĂNG KÝ TÀI KHOẢN</h1>
         </div>
@@ -24,16 +24,18 @@
                                autocomplete="off" required="">
                         <div id="emailError" class="error-check" style="display:none;"></div>
                     </label>
+					{{--
                     <label>
                         <span>Số điện thoại</span>
                         <input id="txtPhoneReg" placeholder="Ex.: 0836826812"
                                autocomplete="off" required="">
                         <div id="emailError" class="error-check" style="display:none;"></div>
                     </label>
+					--}}
                     <label>
                         <span>Mật Khẩu</span>
                         <input type="password" id="txtPasswordReg" onchange="checkPassReg();"
-                               placeholder="• • • • • • • • • •" autocomplete="off" required="">
+                               placeholder="Mật khẩu!" autocomplete="off" required="">
                         <div id="regacc_passs_tooltip" class="error-check" style="display:none;"></div>
                     </label>
 
@@ -43,7 +45,8 @@
                                placeholder="• • • • • • • • • •" autocomplete="off" required="">
                         <div id="regacc_repasss_tooltip" class="error-check" style="display:none;"></div>
                     </label>
-
+					
+					{{--
                     <label>
                         <span>Xác nhận Captcha</span> <br>
                         <div class="wrapper-captcha">
@@ -54,6 +57,7 @@
                         <div id="regacc_txtcode_tooltip" class="error-check" style="display:none;">
                         </div>
                     </label>
+					--}}
 
                     <label class="errors-register-form" style="display: none;color: red"></label>
 
@@ -63,29 +67,7 @@
         </div>
     </section>
 
-    <section class="box guia">
-        <div class="title-new">
-            <h1>Hướng dẫn</h1>
-        </div>
-        <ul class="biglist animElement slide-left">
-            <li>
-                <a href="game_guide/1">
-                    <i class="icon-controls"></i>
-                    <strong>Điều Khiển</strong>
-                    <p>Sử dụng các phím mũi tên để di chuyển nhân vật và điều chỉnh góc, phím cách dùng để bắn.
-                    </p>
-                </a>
-            </li>
-            <li>
-                <a href="game_guide/2">
-                    <i class="icon-fight-lab"></i>
-                    <strong>Đo màn hình</strong>
-                    <p>Hướng dẫn đo màn hình và lực bắn để bắn chính xác.</p>
-                </a>
-            </li>
 
-        </ul>
-    </section>
 
 @endsection
 

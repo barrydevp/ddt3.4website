@@ -68,7 +68,7 @@
 	  -webkit-transform: translate(0, 100px);
 	}
 	.animElement.slide-bottom.in-view{
-	  opacity: 1;
+		opacity: 1;
 		filter: opacity(100%);
 		-webkit-filter: opacity(100%);
 	  transform: translate(0, 0);
@@ -477,6 +477,7 @@
 		margin: 5px;
 	}
 
+
 	/* SLIDE */
 	main #slideHome {
 		width: 100%;
@@ -619,5 +620,76 @@
 	div.modal .box .cancel {
 		width: 100%;
 	}
-
 }
+
+.page-master-menu .widget {
+    border: 1px solid #f9e6da;
+}
+
+.page-master-menu .widget .inner {
+    background-color: #fff;
+}
+
+.page-master-menu .widget h3{
+    background: #f28a1a;
+    color: #fff;
+}
+
+.page-master-menu .widget.menu-serve-list {
+    top: 10px;
+}
+
+.page-master-menu .widget.menu-raking-users {
+    top: 10px;
+}
+
+.page-master-menu .widget.menu-raking-users .tag {
+    top: 0;
+}
+
+.page-master-menu .widget.menu-raking-users #load-ranking-container {
+    display: block;
+    padding: 10px 0;
+    font-size: 14px;
+    color: coral;
+}
+
+.section-special-items {
+    margin-top: 170px !important;
+    border: 1px solid #f9e6da !important;
+}
+
+.section-special-items .title-new {
+    color: #ff610b !important;
+    display: flex !important;
+    width: fit-content;
+    text-align: center;
+    align-items: center;
+}
+
+.section-special-items .title-new h1 {
+    margin-left: 12px;
+}
+
+.section-special-items .tabsAnchor.small a {
+    color: #a49482 !important;
+}
+
+.section-special-items .tabsAnchor.small a.active {
+    color: #ff610b !important;
+}
+
+.section-special-items .animElement {
+    border: 1px solid #ad997c !important;
+}
+
+.section-special-items div span {
+    color: #000 !important;
+    margin-top: 6px;
+    font-size: 12px;
+}
+
+.menu-section-fanpage {
+    top: 10px !important;
+}
+/*color: #ff610b;*/

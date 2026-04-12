@@ -9,6 +9,11 @@
 
 define('LARAVEL_START', microtime(true));
 
+if ($_SERVER['SERVER_PORT'] == 443) {
+    header('Location: http://gunny92.com');
+    die;
+}
+
 /*
 |--------------------------------------------------------------------------
 | Register The Auto Loader

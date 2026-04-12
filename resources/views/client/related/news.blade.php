@@ -1,22 +1,32 @@
-<div class="box mid">
-    <div class="render01"></div>
-    <div class="tabsAnchor">
-        <a href="#All" id="all-news" class="newshome active">TẤT CẢ</a>
-        <a href="#Announces" id="announ-news" class="newshome">THÔNG BÁO</a>
-        <a href="#News" id="new-news" class="newshome">TIN TỨC</a>
-        <a href="#Events" id="event-news" class="newshome">SỰ KIỆN</a>
-    </div>
-    <div class="tabsContent animElement zoom-in time-300">
-        <div id="tabAll" class="active" style="display: inline-block;">
-            <ul class="listtag" id="news2"></ul>
-            <div id="loadingnews" style="display: none">
-                <center><img src="/assets/img/loader.gif"></center>
+
+    <div class="box mid section-display-newfeed">
+        <div class="render01"></div>
+        <div class="tabsAnchor">
+            <a href="#All" id="all-news" class="newshome active">TẤT CẢ</a>
+            <a href="#Announces" id="announ-news" class="newshome">THÔNG BÁO</a>
+            <a href="#News" id="new-news" class="newshome">TIN TỨC</a>
+            <a href="#Events" id="event-news" class="newshome">SỰ KIỆN</a>
+        </div>
+        <div class="tabsContent animElement zoom-in time-300 in-view">
+            <div id="tabAll" class="active" style="display: inline-block;">
+                <ul class="listtag" id="news2"></ul>
+                <div id="loadingnews" style="display: none">
+                    <img src="/assets/img/loader.gif">
+                </div>
+
             </div>
+
             <a href="javascript:void(0);" id="loadMore" class="seeall">Xem thêm...</a>
         </div>
-
     </div>
-</div>
+    <div class="cards animElement slide-bottom time-300 in-view">
+        <a href="https://download.com.vn/download/uc-browser-87467" target="_BLANK" class="right">
+            <img src="/assets/img/taigame-10.png">
+        </a>
+        <a href="https://drive.google.com/drive/folders/1BQ-HdgVYIZ6suIWhVKsYRcOnMq0WM11p?usp=sharing" class="right" download="">
+            <img src="/assets/img/taigame-09.png">
+        </a>
+    </div>
 
 @push('js')
     <script type="text/javascript">

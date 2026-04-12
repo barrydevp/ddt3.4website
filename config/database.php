@@ -89,6 +89,7 @@ return [
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
+            'trust_server_certificate' => 'true',
         ],
 
         'sqlsrv_mem' => [
@@ -102,6 +103,7 @@ return [
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
+            'trust_server_certificate' => 'true',
         ],
 
         'sqlsrv_tank' => [
@@ -115,6 +117,7 @@ return [
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
+            'trust_server_certificate' => 'true',
         ],
 
         'sqlsrv_tank2' => [
@@ -128,6 +131,7 @@ return [
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
+            'trust_server_certificate' => 'true',
         ],
 
 		'sqlsrv_tank3' => [
@@ -141,6 +145,7 @@ return [
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
+            'trust_server_certificate' => 'true',
         ],
 
         'sqlsrv_tank41' => [
@@ -154,6 +159,7 @@ return [
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
+            'trust_server_certificate' => 'true',
         ],
 
         'sqlsrv_tank42' => [
@@ -167,6 +173,7 @@ return [
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
+            'trust_server_certificate' => 'true',
         ],
 		
 		'sqlsrv_tank43' => [
@@ -180,6 +187,7 @@ return [
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
+            'trust_server_certificate' => 'true',
         ],
         'sqlsrv_mem_backup' => [
             'driver' => 'sqlsrv',
@@ -192,6 +200,7 @@ return [
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
+            'trust_server_certificate' => 'true',
         ]
     ],
 

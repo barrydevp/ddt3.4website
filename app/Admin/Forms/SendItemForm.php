@@ -57,6 +57,9 @@ class SendItemForm extends Form
         $error = [];
         $itemKeys = array_keys($items);
         foreach ($players as $player_id) {
+			if (empty($player_id)) {
+				continue;
+			}
             $player = Player::on($connection)->select('UserID')->where('UserID', (int) $player_id)->first(); //On connection
             if (empty($player)) {
                 continue;
@@ -92,8 +95,8 @@ class SendItemForm extends Form
                     ];
                     $_uri .= implode(',', $item_param).'|';
                 }
-//                echo $_uri.'<br>';
-//                return;
+                //echo $_uri.'<br>';
+                //return;
                 $result = file_get_contents($_uri);
 				//echo $result;
 				//return;

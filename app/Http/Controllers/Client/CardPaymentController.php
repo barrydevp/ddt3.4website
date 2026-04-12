@@ -20,7 +20,7 @@ class CardPaymentController extends Controller
             $heSoATM = Setting::get('he-so-atm');
             $heSoTheCao = Setting::get('he-so-nap-the');
             $member = $request->user('member');
-            $momoQrText = '2|99|0586431600|NGUYEN ANH MINH||0|0|0|GG '.$member->Email.'|transfer_myqr';
+            $momoQrText = '2|99|08|MAC CHI KHANG||0|0|0|GG '.$member->Email.'|transfer_myqr';
             $momoQr = QrCode::size(250)->generate($momoQrText);
             $html = view('client.payment.recharge',compact('heSoATM', 'heSoTheCao', 'momoQr'))->render();
             return response()->json($html);

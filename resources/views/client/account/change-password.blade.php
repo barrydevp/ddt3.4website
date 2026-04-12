@@ -16,7 +16,7 @@
 
                 <label>
                     <span>Mật khẩu mới</span>
-                    <input id="txtNewPassword" type="password" placeholder="••••••"
+                    <input id="txtNewPassword" type="password" placeholder="Mật khẩu mới!"
                            autocomplete="off" required="">
                     <div id="emailError" class="error-check" style="display:none;"></div>
                 </label>
@@ -28,6 +28,7 @@
                     <div id="regacc_passs_tooltip" class="error-check" style="display:none;"></div>
                 </label>
 
+				{{--
                 <label>
                     <span>Xác nhận Captcha</span> <br>
                     <div class="wrapper-captcha">
@@ -38,6 +39,7 @@
                     <div id="regacc_txtcode_tooltip" class="error-check" style="display:none;">
                     </div>
                 </label>
+				--}}
                 <div class="button-functional-account">
                     <a id="changePasswordBtn" class="item"
                        style="background-color: rgb(245,98,0); border-color: rgb(250,83,0);">Thay đổi mật khẩu

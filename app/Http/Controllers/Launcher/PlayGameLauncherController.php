@@ -42,7 +42,7 @@ class PlayGameLauncherController extends Controller
 			),
 		);
 
-		$content = file_get_contents( trim($requestLink, '/'). "/CreateLogin.aspx?content=" . $username . "|" . strtoupper($keyRand) . "|" . $timeNow . "|" . md5($username . strtoupper($keyRand) . $timeNow . env('KEY_REQUEST', 'QY-16-WAN-0668-2555555-7ROAD-dandantang-love777nguyenluu')), false, stream_context_create($arrContextOptions));
+		$content = file_get_contents( trim($requestLink, '/'). "/CreateLogin.aspx?content=" . $username . "|" . strtoupper($keyRand) . "|" . $timeNow . "|" . md5($username . strtoupper($keyRand) . $timeNow . env('KEY_REQUEST', 'QY-16-WAN-0668-2555555-7ROAD-dandantang-love777')), false, stream_context_create($arrContextOptions));
         if (trim($content) != "0") {
             return $content;
         }
@@ -52,7 +52,7 @@ class PlayGameLauncherController extends Controller
         if($player)
             $player->launcherLoggedin();
 
-        $playUrl =  trim(env('APP_URL', 'https://gunga.vn'), '/').'/flash/Loading.swf?user=' . $username . '&key=' . $keyRand . '&v=10950&rand=' . rand(100000000, 999999999) . '&config=' . $server->LinkConfig . '&sessionId=' . rand(100000000, 999999999);
+        $playUrl =  trim(env('APP_URL', 'http://gunny92.com'), '/').'/flash/Loading.swf?user=' . $username . '&key=' . $keyRand . '&v=10950&rand=' . rand(100000000, 999999999) . '&config=' . $server->LinkConfig . '&sessionId=' . rand(100000000, 999999999);
         return response()->json([
             'success' => true,
             'message' => '',
@@ -92,7 +92,7 @@ class PlayGameLauncherController extends Controller
             ),
         );
 
-        $content = file_get_contents( trim($requestLink, '/'). "/CreateLogin.aspx?content=" . $username . "|" . strtoupper($keyRand) . "|" . $timeNow . "|" . md5($username . strtoupper($keyRand) . $timeNow . env('KEY_REQUEST', 'QY-16-WAN-0668-2555555-7ROAD-dandantang-love777nguyenluu')), false, stream_context_create($arrContextOptions));
+        $content = file_get_contents( trim($requestLink, '/'). "/CreateLogin.aspx?content=" . $username . "|" . strtoupper($keyRand) . "|" . $timeNow . "|" . md5($username . strtoupper($keyRand) . $timeNow . env('KEY_REQUEST', 'QY-16-WAN-0668-2555555-7ROAD-dandantang-love777')), false, stream_context_create($arrContextOptions));
         if (trim($content) != "0") {
             return response($content);
         }
@@ -102,7 +102,7 @@ class PlayGameLauncherController extends Controller
         if($player)
             $player->launcherLoggedin();
 
-        $playUrl =  trim(env('APP_URL', 'https://gunga.vn'), '/').'/flash/Loading.swf?user=' . $username . '&key=' . $keyRand . '&v=10950&rand=' . rand(100000000, 999999999) . '&config=' . $server->LinkConfig . '&sessionId=' . rand(100000000, 999999999);
+        $playUrl =  trim(env('APP_URL', 'http://gunny92.com'), '/').'/flash/Loading.swf?user=' . $username . '&key=' . $keyRand . '&v=10950&rand=' . rand(100000000, 999999999) . '&config=' . $server->LinkConfig . '&sessionId=' . rand(100000000, 999999999);
         return response($playUrl);
     }
 }

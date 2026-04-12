@@ -1,4 +1,4 @@
-<section>
+<section class='section-display-news'>
     <div class="slideshow-container animElement slide-left">
         @foreach($slides as $slide)
             <div class="mySlides fade">
@@ -21,4 +21,3 @@
         @endforeach
     </div>
 </section>
-
