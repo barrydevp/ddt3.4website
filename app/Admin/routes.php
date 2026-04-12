@@ -82,6 +82,12 @@ Route::group([
     $router->get('active-award-management', 'ActiveManagement\GiftCodeController@showAddActiveAward')->name('hee'); //Dont known
     $router->resource('active-numbers', ActiveManagement\ActiveNumberController::class);
 
+    //__GM Event Management__//
+    $router->resource('gm-activities', EventManagement\GMActivityController::class);
+    $router->resource('gm-giftbags', EventManagement\GMGiftBagController::class);
+    $router->resource('gm-active-conditions', EventManagement\GMActiveConditionController::class);
+    $router->resource('gm-active-rewards', EventManagement\GMActiveRewardController::class);
+
 
     //__Mission Management__//
     //---- Mission Info

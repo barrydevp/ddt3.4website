@@ -27,27 +27,27 @@ class ItemFusion extends Model
 
     public function FirstItem()
     {
-        return $this->hasOne('App\ShopGoods','TemplateID','Item1');
+        return $this->hasOne('App\ShopGoods','TemplateID','Item1')->withDefault();
     }
 
     public function SecondItem()
     {
-        return $this->hasOne('App\ShopGoods','TemplateID','Item2');
+        return $this->hasOne('App\ShopGoods','TemplateID','Item2')->withDefault();
     }
 
     public function ThirdItem()
     {
-        return $this->hasOne('App\ShopGoods','TemplateID','Item3');
+        return $this->hasOne('App\ShopGoods','TemplateID','Item3')->withDefault();
     }
 
     public function FourthItem()
     {
-        return $this->hasOne('App\ShopGoods','TemplateID','Item4');
+        return $this->hasOne('App\ShopGoods','TemplateID','Item4')->withDefault();
     }
 
     public function RewardItem()
     {
-        return $this->hasOne('App\ShopGoods','TemplateID','Reward');
+        return $this->hasOne('App\ShopGoods','TemplateID','Reward')->withDefault();
     }
 
 }

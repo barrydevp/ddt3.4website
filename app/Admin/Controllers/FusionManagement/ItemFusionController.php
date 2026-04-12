@@ -8,6 +8,7 @@ use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use Illuminate\Support\Facades\Auth;
 
 class ItemFusionController extends AdminController
 {
@@ -25,44 +26,39 @@ class ItemFusionController extends AdminController
      */
     protected function grid()
     {
-        $grid = new Grid(new ItemFusion());
-        $grid->model()->orderByDesc('FusionID');
+        $currentTank = Auth::guard('admin')->user()->current_tank;
+
+        $itemFusion = new ItemFusion();
+        $itemFusion->setConnection($currentTank);
+
+        $grid = new Grid($itemFusion);
+        $grid->model()->with(['FirstItem', 'SecondItem', 'ThirdItem', 'FourthItem', 'RewardItem'])->orderByDesc('FusionID');
 
         $grid->column('FusionID', __('ID'))->width(45);
-        $grid->column('_ImageFirstItem_', 'Ảnh 1')->display(function (){
+        $grid->column('_ImageFirstItem_', 'Ảnh 1')->display(function () {
             return $this->FirstItem->ResourceImageColumn();
         });
-        $grid->column('FirstItem', __('VP 1'))->display(function (){
-            return $this->FirstItem->Name;
-        });
+        $grid->column('FirstItem.Name', __('VP 1'));
 
-        $grid->column('_Image2Item_', __('Ảnh 2'))->display(function (){
+        $grid->column('_Image2Item_', __('Ảnh 2'))->display(function () {
             return $this->SecondItem->ResourceImageColumn();
         });
-        $grid->column('Item2', __('VP 2'))->display(function (){
-            return $this->SecondItem->Name;
-        });
+        $grid->column('SecondItem.Name', __('VP 2'));
 
-        $grid->column('_Image3Item_', __('Ảnh 3'))->display(function (){
+        $grid->column('_Image3Item_', __('Ảnh 3'))->display(function () {
             return $this->ThirdItem->ResourceImageColumn();
         });
-        $grid->column('Item3', __('VP 3'))->display(function (){
-            return $this->ThirdItem->Name;
-        });
+        $grid->column('ThirdItem.Name', __('VP 3'));
 
-        $grid->column('_Image4Item_', __('Ảnh 4'))->display(function (){
+        $grid->column('_Image4Item_', __('Ảnh 4'))->display(function () {
             return $this->FourthItem->ResourceImageColumn();
         });
-        $grid->column('Item4', __('VP 4'))->display(function (){
-            return $this->FourthItem->Name;
-        });
+        $grid->column('FourthItem.Name', __('VP 4'));
 
-        $grid->column('_ImageRewardItem_', __('Ảnh PT'))->display(function (){
+        $grid->column('_ImageRewardItem_', __('Ảnh PT'))->display(function () {
             return $this->RewardItem->ResourceImageColumn();
         });
-        $grid->column('Reward', __('Phần thưởng'))->display(function (){
-            return $this->RewardItem->Name;
-        });
+        $grid->column('RewardItem.Name', __('Phần thưởng'));
 
         $grid->column('Formula', __('Formula'));
 
