@@ -122,6 +122,7 @@ class GMActivityController extends AdminController
         $form = new Form($activity);
         $form->setTitle('Sự kiện');
         $form->hidden('server')->default($server->ServerID);
+        $form->ignore('server');
 
         if ($form->isCreating()) {
             $form->text('activityId', 'Mã sự kiện')
@@ -141,16 +142,16 @@ class GMActivityController extends AdminController
         $form->textarea('rewardDesc', 'Mô tả phần thưởng');
         $form->textarea('desc', 'Mô tả sự kiện');
 
-        $form->datetime('beginTime', 'Bắt đầu')->default(date('Y-m-d H:i:s'))->required();
-        $form->datetime('beginShowTime', 'Hiển thị từ')->default(date('Y-m-d H:i:s'))->required();
-        $form->datetime('endTime', 'Kết thúc')->default(date('Y-m-d H:i:s'))->required();
-        $form->datetime('endShowTime', 'Hiển thị đến')->default(date('Y-m-d H:i:s'))->required();
+        $form->datetime('beginTime', 'Bắt đầu')->default(date('Y-m-d H:i:s'))->rules('required|date');
+        $form->datetime('beginShowTime', 'Hiển thị từ')->default(date('Y-m-d H:i:s'))->rules('required|date');
+        $form->datetime('endTime', 'Kết thúc')->default(date('Y-m-d H:i:s'))->rules('required|date');
+        $form->datetime('endShowTime', 'Hiển thị đến')->default(date('Y-m-d H:i:s'))->rules('required|date');
 
         $form->number('icon', 'Icon')->default(1);
         $form->switch('isContinue', 'Lặp lại')->default(0);
         $form->switch('status', 'Trạng thái')->default(1);
         $form->number('remain1', 'remain1')->default(1);
-        $form->text('remain2', 'remain2');
+        $form->text('remain2', 'remain2')->default('');
         $form->number('SectionId', 'SectionId')->default(0);
         $form->switch('CanReset', 'CanReset')->default(0);
 

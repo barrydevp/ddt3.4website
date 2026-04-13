@@ -115,6 +115,7 @@ class GMGiftBagController extends AdminController
 
         $form = new Form($giftBag);
         $form->hidden('server')->default($server->ServerID);
+         $form->ignore('server');
 
         $form->number('giftbagId', 'Giftbag ID')->required();
         $form->select('activityId', 'Mã sự kiện')->options($activityOptions)->required();

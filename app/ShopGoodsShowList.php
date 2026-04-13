@@ -10,7 +10,11 @@ class ShopGoodsShowList extends Model
     protected $connection = 'sqlsrv_tank';
     public $table = 'ShopGoodsShowList';
     protected $primaryKey = 'Type';
-    protected $casts = ['ShopId' => 'decimal:1'];
+    protected $casts = [
+        'Type' => 'integer',
+        'ShopId' => 'integer',
+    ];
+    protected $keyType = 'int';
     public $fillable = ['Type', 'ShopId'];
     public $timestamps = false;
     public $incrementing = false;

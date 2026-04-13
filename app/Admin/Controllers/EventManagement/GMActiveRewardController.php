@@ -194,6 +194,7 @@ class GMActiveRewardController extends AdminController
 
         $form = new Form($reward);
         $form->hidden('server')->default($server->ServerID);
+        $form->ignore('server');
 
         $form->select('templateId', 'Vật phẩm')
             ->options(function ($templateID) use ($currentTank) {

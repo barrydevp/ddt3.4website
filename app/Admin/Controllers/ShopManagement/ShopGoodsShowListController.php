@@ -173,19 +173,20 @@ class ShopGoodsShowListController extends AdminController
 
             if($form->isCreating()){
                 $types = $form->Type;
-                $shopId = $form->ShopId;
+                $shopId = (int) $form->ShopId;
                 if((is_array($types) && sizeof($types) > 0)){
-                    for ($i = 0; $i < sizeof($types) - 1; $i++ ){
+                    $showList = [];
+                    for ($i = 0; $i < sizeof($types); $i++ ){
                         $showList[] = [
                             'ShopId' => $shopId,
-                            'Type' => $types[$i],
+                            'Type' => (int) $types[$i],
                         ];
                     }
                     DB::connection($currentTank)->table('ShopGoodsShowList')->insert($showList);
                 }
             }
             else {
-                dd("EDIT");
+                admin_toastr('Bản ghi này không hỗ trợ chỉnh sửa trực tiếp.', 'warning');
             }
             admin_toastr('Thêm vật phẩm vào Shop thành công', 'success');
             return redirect('admin/showlist-management');

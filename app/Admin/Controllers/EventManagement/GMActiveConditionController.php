@@ -137,6 +137,7 @@ class GMActiveConditionController extends AdminController
 
         $form = new Form($condition);
         $form->hidden('server')->default($server->ServerID);
+        $form->ignore('server');
 
         $form->select('giftbagId', 'Giftbag ID')->options($giftbagOptions)->required();
         $form->number('conditionIndex', 'Loại điều kiện')->default(0);

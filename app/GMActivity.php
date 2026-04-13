@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class GMActivity extends Model
@@ -54,10 +55,6 @@ class GMActivity extends Model
         'activityType' => 'integer',
         'activityChildType' => 'integer',
         'getWay' => 'integer',
-        'beginTime' => 'datetime',
-        'beginShowTime' => 'datetime',
-        'endTime' => 'datetime',
-        'endShowTime' => 'datetime',
         'icon' => 'integer',
         'isContinue' => 'integer',
         'status' => 'integer',
@@ -65,4 +62,37 @@ class GMActivity extends Model
         'SectionId' => 'integer',
         'CanReset' => 'boolean',
     ];
+
+    public function setBeginTimeAttribute($value)
+    {
+        $this->attributes['beginTime'] = $this->normalizeDateTimeValue($value);
+    }
+
+    public function setBeginShowTimeAttribute($value)
+    {
+        $this->attributes['beginShowTime'] = $this->normalizeDateTimeValue($value);
+    }
+
+    public function setEndTimeAttribute($value)
+    {
+        $this->attributes['endTime'] = $this->normalizeDateTimeValue($value);
+    }
+
+    public function setEndShowTimeAttribute($value)
+    {
+        $this->attributes['endShowTime'] = $this->normalizeDateTimeValue($value);
+    }
+
+    private function normalizeDateTimeValue($value)
+    {
+        if ($value === null || $value === '') {
+            return null;
+        }
+
+        if ($value instanceof Carbon) {
+            return $value->format('Y-m-d H:i:s');
+        }
+
+        return Carbon::parse($value)->format('Y-m-d H:i:s');
+    }
 }
